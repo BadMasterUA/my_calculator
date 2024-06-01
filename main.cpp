@@ -7,8 +7,8 @@ int p_add(int, int);
 int p_sub(int, int);
 int p_mult(int, int);
 int p_div(int, int);
-double fuel_mass(double, double);
-double fuel_vol(double, double);
+void fuel_mass();
+void fuel_vol();
 
 
 int main(){
@@ -17,8 +17,8 @@ int main(){
     char value; //переменная для хранения выбора действия
 
     cout <<"Welcome to the calculator!" << endl;
-    cout <<"Выберите одно из действий:" << endl;
-    cout <<" Addition (+)\n Subtraction (-)\n Multiplication (*)\n Division (/)\n Fuel mass calculation (m)\n Fuel volume calculation (v)" << endl;
+    cout <<"Select one of the actions:" << endl;
+    cout <<" Addition (+)\n Subtraction (-)\n Multiplication (*)\n Division (/)\n Fuel mass calculation (m)\n Fuel volume calculation (v)\n" << endl;
 
     cin >> value;  //принимаем значение от пользователя
 
@@ -67,6 +67,16 @@ int main(){
         cout << "The sum is equal: " << p_div(a,b);
 
         break;
+
+    case 'm':
+        fuel_mass();
+
+        break;
+
+    case 'v':
+        fuel_vol();
+
+        break;
     
     default:
 
@@ -101,19 +111,30 @@ int p_div(int a, int b){
 
 /*Функция определения массы топлива принимает на вход два параметра
 плотность топлива (ro) и объем топлива (vol)*/
-double fuel_mass(double ro, double vol){
+void fuel_mass(){
+
+    double res, ro, vol;
+
     cout << "enter fuel density (ro)" << endl;
     cin >> ro;
 
     cout << "enter fuel volume (vol)" << endl;
     cin >> vol;
 
-    return vol * ro;
+    if(ro <= 0){
+        cout << "Check the density value!";
+    }else{
+        res = vol * ro;
+        cout << "the mass of the fuel is " << res << " kilogram\n";
+    }
 }
 
 /*Функция определения объема топлива принимает на вход два параметра
 плотность топлива (ro) и масса топлива (м)*/
-double fuel_vol(double ro, double m){
+void fuel_vol(){
+    
+    double res, ro, m;
+
     cout << "enter fuel density (ro)" << endl;
     cin >> ro;
 
@@ -121,11 +142,10 @@ double fuel_vol(double ro, double m){
     cin >> m;
 
     if (ro > 0){
-        return m / ro;
+        res = m / ro;
+        cout << "the volume of fuel is " << res << " litуrs\n";
     }else{
         cout <<"You can't divide by zero!";
-        return -1;
-
     }
     
 }
